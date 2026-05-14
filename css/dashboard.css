@@ -1,0 +1,35 @@
+/* Dashboard - Neon Tech Edition */
+.donut-chart {
+    background: conic-gradient(var(--primary-neon) var(--percentage), rgba(255, 255, 255, 0.05) 0);
+    box-shadow: 0 0 20px var(--primary-neon-glow);
+}
+
+.donut-chart::before {
+    background: var(--bg-dark-card);
+}
+
+.donut-value {
+    color: var(--primary-neon);
+    text-shadow: 0 0 10px var(--primary-neon-glow);
+}
+
+.streak-card {
+    background: linear-gradient(135deg, #000 0%, #111 100%);
+    border: 2px solid var(--primary-neon);
+    box-shadow: 0 0 30px rgba(217, 255, 102, 0.1);
+}
+
+.streak-value {
+    color: var(--primary-neon);
+    text-shadow: 0 0 15px var(--primary-neon-glow);
+}
+
+.activity-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--border-neon);
+}
+
+.activity-icon {
+    background: var(--bg-dark-card);
+    border: 1px solid var(--border-neon);
+}

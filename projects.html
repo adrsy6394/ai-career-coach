@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Project Ideas | AI Career Coach</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/notifications.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">AI <span>Career Coach</span></a>
+        </div>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search roadmaps, questions, tools...">
+        </div>
+        <div class="nav-links flex align-center" style="gap: 1.5rem;" id="navUserLinks">
+            <span id="userNameDisplay" style="font-weight: 600;">Future Developer</span>
+            <button class="btn btn-ghost" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="nav-item"><i>📊</i> Dashboard</a>
+            <a href="resume.html" class="nav-item"><i>📄</i> Resume Analyzer</a>
+            <a href="interview.html" class="nav-item"><i>🎙️</i> Interview Prep</a>
+            <a href="roadmaps.html" class="nav-item"><i>🗺️</i> Roadmaps</a>
+            <a href="chat.html" class="nav-item"><i>💬</i> AI Chat</a>
+            <a href="projects.html" class="nav-item active"><i>🚀</i> Project Ideas</a>
+            <a href="portfolio.html" class="nav-item"><i>💻</i> Portfolio & Code</a>
+        </aside>
+
+        <main class="main-content">
+            <header style="margin-bottom: var(--spacing-lg);">
+                <h1>AI Project Idea Generator</h1>
+                <p style="color: var(--text-muted);">Get personalized project suggestions based on your skill level.</p>
+            </header>
+
+            <!-- Filter Section -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-level="all">All Levels</button>
+                <button class="filter-btn" data-level="beginner">Beginner</button>
+                <button class="filter-btn" data-level="intermediate">Intermediate</button>
+                <button class="filter-btn" data-level="advanced">Advanced</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projectsGrid" class="projects-grid">
+                <!-- Injected by JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/projects.js"></script>
+</body>
+</html>

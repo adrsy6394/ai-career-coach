@@ -1,0 +1,98 @@
+/* Career Assistant Chat - Neon Tech Edition */
+.chat-page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: calc(100vh - 220px);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: var(--spacing-md);
+}
+
+.chat-history-sidebar {
+    background: var(--bg-dark-card);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border-neon);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.history-item {
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: white;
+}
+
+.history-item.active {
+    background: rgba(217, 255, 102, 0.05);
+    color: var(--primary-neon);
+    border-color: var(--border-neon);
+}
+
+.chat-main {
+    background: var(--bg-dark-card);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-neon);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-messages-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    background: var(--bg-deep-black);
+}
+
+.message-ai strong {
+    color: var(--primary-neon);
+}
+
+.message-ai code {
+    background: rgba(217, 255, 102, 0.1);
+    color: var(--primary-neon);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+.message-ai pre {
+    background: #000;
+    color: #f8fafc;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-neon);
+    margin-top: 1rem;
+}
+
+.chat-footer {
+    padding: var(--spacing-md);
+    background: var(--bg-dark-card);
+    border-top: 1px solid var(--border-neon);
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.chat-input-field {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-neon);
+    color: white;
+    outline: none;
+    resize: none;
+}

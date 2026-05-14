@@ -1,0 +1,85 @@
+/* Resume Analyzer - Neon Tech Edition */
+.upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.upload-area {
+    border: 2px dashed var(--border-neon);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xl);
+    text-align: center;
+    background: var(--bg-dark-card);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: var(--spacing-lg);
+}
+
+.upload-area:hover, .upload-area.drag-over {
+    border-color: var(--primary-neon);
+    background-color: rgba(217, 255, 102, 0.05);
+    box-shadow: 0 0 20px rgba(217, 255, 102, 0.1);
+}
+
+.upload-icon {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-sm);
+    display: block;
+    filter: drop-shadow(0 0 10px var(--primary-neon-glow));
+}
+
+.file-info {
+    display: none;
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(217, 255, 102, 0.05);
+    border: 1px solid var(--border-neon);
+    border-radius: 1rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Analysis Layout */
+.analysis-grid {
+    display: none;
+    grid-template-columns: 320px 1fr;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+.progress-ring {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.progress-ring circle {
+    fill: none;
+    stroke-width: 12;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+.progress-ring .background {
+    stroke: rgba(255, 255, 255, 0.05);
+}
+
+.progress-ring .foreground {
+    stroke: var(--primary-neon);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s ease;
+    filter: drop-shadow(0 0 8px var(--primary-neon-glow));
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 4px;
+}
+
+@keyframes loading {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}

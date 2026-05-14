@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio & Coding Tools | AI Career Coach</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+    <link rel="stylesheet" href="css/notifications.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">AI <span>Career Coach</span></a>
+        </div>
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" placeholder="Search roadmaps, questions, tools...">
+        </div>
+        <div class="nav-links flex align-center" style="gap: 1.5rem;" id="navUserLinks">
+            <span id="userNameDisplay" style="font-weight: 600;">Future Developer</span>
+            <button class="btn btn-ghost" onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <a href="dashboard.html" class="nav-item"><i>📊</i> Dashboard</a>
+            <a href="resume.html" class="nav-item"><i>📄</i> Resume Analyzer</a>
+            <a href="interview.html" class="nav-item"><i>🎙️</i> Interview Prep</a>
+            <a href="roadmaps.html" class="nav-item"><i>🗺️</i> Roadmaps</a>
+            <a href="chat.html" class="nav-item"><i>💬</i> AI Chat</a>
+            <a href="projects.html" class="nav-item"><i>🚀</i> Project Ideas</a>
+            <a href="portfolio.html" class="nav-item active"><i>💻</i> Portfolio & Code</a>
+        </aside>
+
+        <main class="main-content">
+            <header style="margin-bottom: var(--spacing-lg);">
+                <h1>Development Tools</h1>
+                <p style="color: var(--text-muted);">Improve your code quality and portfolio presence.</p>
+            </header>
+
+            <div class="tab-system">
+                <div class="tab-btn active" onclick="switchToolTab('portfolio')">Portfolio Reviewer</div>
+                <div class="tab-btn" onclick="switchToolTab('code')">AI Coding Assistant</div>
+            </div>
+
+            <!-- Portfolio Reviewer Tab -->
+            <div id="portfolioTab" class="tab-content active">
+                <div class="url-input-group">
+                    <input type="url" id="portfolioUrl" class="url-input" placeholder="https://yourportfolio.com">
+                    <button class="btn btn-primary" onclick="reviewPortfolio()">Analyze URL</button>
+                </div>
+
+                <div id="portfolioResults" style="margin-top: var(--spacing-xl); display: none;">
+                    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
+                        <div class="card">
+                            <h4 style="color: var(--primary-neon);">UI/UX Feedback</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem;">The spacing in your project section is inconsistent. Try using a standardized grid.</p>
+                        </div>
+                        <div class="card">
+                            <h4 style="color: #22c55e;">SEO & Performance</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem;">Perfect! All images have ALT tags and the site loads in under 1.2s.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coding Assistant Tab -->
+            <div id="codeTab" class="tab-content">
+                <div class="code-assistant-grid">
+                    <div class="editor-pane">
+                        <textarea id="codeInput" class="code-editor-area" placeholder="// Paste your code here..."></textarea>
+                        <div class="flex" style="gap: var(--spacing-sm); margin-top: var(--spacing-sm);">
+                            <button class="btn btn-primary" onclick="analyzeCode('explain')">Explain Code</button>
+                            <button class="btn btn-outline" onclick="analyzeCode('bugs')">Find Bugs</button>
+                        </div>
+                    </div>
+                    <div id="codeAnalysisOutput" class="analysis-panel">
+                        <div class="card">
+                            <p style="color: var(--text-muted); text-align: center;">Result will appear here...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/portfolio.js"></script>
+</body>
+</html>

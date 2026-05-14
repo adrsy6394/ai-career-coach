@@ -1,0 +1,92 @@
+/* Interview Chat - Neon Tech Edition */
+.interview-container {
+    max-width: 900px;
+    margin: 0 auto;
+    height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-dark-card);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-neon);
+    overflow: hidden;
+}
+
+.chat-header {
+    padding: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid var(--border-neon);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    background-color: var(--bg-deep-black);
+}
+
+.message {
+    max-width: 80%;
+    padding: 1.25rem;
+    border-radius: 1.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+.message-ai {
+    align-self: flex-start;
+    background: var(--bg-dark-card);
+    color: white;
+    border: 1px solid var(--border-neon);
+    border-bottom-left-radius: 0.25rem;
+}
+
+.message-user {
+    align-self: flex-end;
+    background: var(--primary-neon);
+    color: var(--bg-deep-black);
+    font-weight: 600;
+    border-bottom-right-radius: 0.25rem;
+    box-shadow: 0 0 15px var(--primary-neon-glow);
+}
+
+.chat-input-area {
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border-neon);
+    display: flex;
+    gap: var(--spacing-sm);
+    background: var(--bg-dark-card);
+}
+
+.chat-input {
+    flex: 1;
+    padding: 0.875rem 1.5rem;
+    border-radius: 2rem;
+    border: 1px solid var(--border-neon);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    outline: none;
+}
+
+.chat-input:focus {
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 10px rgba(217, 255, 102, 0.2);
+}
+
+.feedback-indicator {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    text-transform: uppercase;
+}
+
+.indicator-confidence { background: rgba(34, 197, 94, 0.1); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.2); }
+.indicator-clarity { background: rgba(217, 255, 102, 0.1); color: var(--primary-neon); border: 1px solid var(--border-neon); }
