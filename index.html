@@ -1,10 +1,299 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; url=pages/index.html" />
-    <title>AI Career Coach | Redirecting...</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Coach | All-in-One Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-neon: #d9ff66;
+            --primary-neon-glow: rgba(217, 255, 102, 0.4);
+            --bg-deep-black: #050505;
+            --bg-dark-card: #121212;
+            --bg-sidebar: #080808;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --border-radius: 1.5rem;
+            --border-neon: rgba(217, 255, 102, 0.2);
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-deep-black); color: var(--text-main); line-height: 1.6; }
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 800; }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Layout */
+        .navbar { height: 70px; background: var(--bg-deep-black); border-bottom: 1px solid var(--border-neon); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--spacing-lg); position: sticky; top: 0; z-index: 1000; }
+        .logo span { color: var(--primary-neon); text-shadow: 0 0 10px var(--primary-neon-glow); }
+        .app-layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 70px); }
+        .sidebar { background: var(--bg-sidebar); border-right: 1px solid var(--border-neon); padding: var(--spacing-lg) var(--spacing-md); position: sticky; top: 70px; height: calc(100vh - 70px); overflow-y: auto; display: flex; flex-direction: column; gap: 0.5rem; }
+        .nav-item { display: flex; align-items: center; gap: 1rem; padding: 0.875rem 1.25rem; border-radius: 1rem; color: var(--text-muted); font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .nav-item:hover, .nav-item.active { color: var(--primary-neon); background: rgba(217, 255, 102, 0.05); }
+        .nav-item.active { background: var(--primary-neon); color: var(--bg-deep-black); box-shadow: 0 0 20px var(--primary-neon-glow); }
+        .main-content { padding: var(--spacing-xl); }
+
+        /* Components */
+        .card { background: var(--bg-dark-card); border: 1px solid var(--border-neon); border-radius: var(--border-radius); padding: var(--spacing-xl); transition: 0.4s; position: relative; margin-bottom: 1.5rem; }
+        .card:hover { border-color: var(--primary-neon); transform: translateY(-5px); }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 2rem; font-weight: 700; cursor: pointer; border: none; font-family: 'Space Grotesk', sans-serif; text-transform: uppercase; }
+        .btn-primary { background: var(--primary-neon); color: var(--bg-deep-black); box-shadow: 0 4px 15px rgba(217, 255, 102, 0.2); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-neon); color: var(--primary-neon); }
+        .input-field { width: 100%; padding: 0.875rem 1.25rem; border-radius: 1rem; border: 1px solid var(--border-neon); background: rgba(255,255,255,0.03); color: white; outline: none; margin-bottom: 1rem; }
+
+        /* SPA Pages */
+        .page-view { display: none; }
+        .page-view.active { display: block; }
+
+        /* Dashboard Specifics */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        .badge-list { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+        .badge-item { background: rgba(217, 255, 102, 0.1); padding: 0.5rem 1rem; border-radius: 2rem; border: 1px solid var(--border-neon); font-size: 0.75rem; color: var(--primary-neon); font-weight: 700; }
+        .task-list { margin-top: 1rem; }
+        .task-item { display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .task-item:last-child { border: none; }
+        .task-item input[type="checkbox"] { accent-color: var(--primary-neon); width: 18px; height: 18px; }
+
+        /* Chat & Interview Specifics */
+        .chat-container { height: 450px; overflow-y: auto; background: var(--bg-deep-black); border: 1px solid var(--border-neon); border-radius: 1rem; padding: 1.5rem; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+        .message { padding: 1rem; border-radius: 1rem; max-width: 80%; }
+        .message-ai { background: var(--bg-dark-card); border: 1px solid var(--border-neon); align-self: flex-start; }
+        .message-user { background: var(--primary-neon); color: var(--bg-deep-black); align-self: flex-end; }
+
+        /* Progress Bar */
+        .progress-track { height: 10px; background: rgba(255,255,255,0.05); border-radius: 5px; margin-top: 0.5rem; position: relative; overflow: hidden; border: 1px solid var(--border-neon); }
+        .progress-fill { height: 100%; background: var(--primary-neon); box-shadow: 0 0 10px var(--primary-neon-glow); transition: width 1.5s ease-in-out; }
+
+        .roadmap-timeline { position: relative; padding-left: 2rem; border-left: 2px solid var(--border-neon); }
+        .roadmap-step { margin-bottom: 2rem; position: relative; }
+        .roadmap-step::before { content: ''; position: absolute; left: -2.1rem; top: 0.5rem; width: 12px; height: 12px; background: var(--primary-neon); border-radius: 50%; box-shadow: 0 0 10px var(--primary-neon-glow); }
+        
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    </style>
 </head>
 <body>
-    <p>Redirecting to <a href="pages/index.html">Dashboard</a>...</p>
+    <nav class="navbar">
+        <div class="logo"><a href="#" onclick="showPage('dashboard')">AI <span>Career Coach</span></a></div>
+        <div class="nav-links"><span style="color: var(--primary-neon);">Future Developer</span></div>
+    </nav>
+
+    <div class="app-layout">
+        <aside class="sidebar">
+            <a href="#" onclick="showPage('dashboard')" class="nav-item active" id="link-dashboard"><i>📊</i> Dashboard</a>
+            <a href="#" onclick="showPage('resume')" class="nav-item" id="link-resume"><i>📄</i> Resume Analyzer</a>
+            <a href="#" onclick="showPage('interview')" class="nav-item" id="link-interview"><i>🎙️</i> Interview Prep</a>
+            <a href="#" onclick="showPage('roadmaps')" class="nav-item" id="link-roadmaps"><i>🗺️</i> Roadmaps</a>
+            <a href="#" onclick="showPage('chat')" class="nav-item" id="link-chat"><i>💬</i> AI Chat</a>
+            <a href="#" onclick="showPage('projects')" class="nav-item" id="link-projects"><i>🚀</i> Project Ideas</a>
+            <a href="#" onclick="showPage('portfolio')" class="nav-item" id="link-portfolio"><i>💻</i> Portfolio & Code</a>
+        </aside>
+
+        <main class="main-content">
+            <!-- DASHBOARD PAGE -->
+            <div id="dashboard-page" class="page-view active">
+                <header style="margin-bottom: var(--spacing-lg);">
+                    <h1>Welcome Back, Developer!</h1>
+                    <p style="color: var(--text-muted);">Your daily summary and career growth trajectory.</p>
+                </header>
+                
+                <div class="stats-grid">
+                    <div class="card reveal">
+                        <h3>Day Streak</h3>
+                        <div style="font-size: 2.5rem; color: var(--primary-neon);">12 🔥</div>
+                        <div class="badge-list">
+                            <span class="badge-item">Early Bird</span>
+                            <span class="badge-item">Code Warrior</span>
+                        </div>
+                    </div>
+                    <div class="card reveal">
+                        <h3>Career Points</h3>
+                        <div style="font-size: 2.5rem; color: #eab308;">2,450 🏆</div>
+                        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">Rank: <strong>#42 Global</strong></p>
+                    </div>
+                    <div class="card reveal">
+                        <h3>Next Goal</h3>
+                        <p style="font-weight: 700;">Frontend Master Certification</p>
+                        <div class="progress-track"><div class="progress-fill" style="width: 75%;"></div></div>
+                        <p style="font-size: 0.75rem; margin-top: 0.5rem;">75% Complete</p>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+                    <div class="reveal">
+                        <h2 style="margin-bottom: 1rem;">Daily Tasks</h2>
+                        <div class="card">
+                            <div class="task-list">
+                                <div class="task-item"><input type="checkbox" checked> <span>Complete daily JS quiz</span></div>
+                                <div class="task-item"><input type="checkbox"> <span>Analyze one resume section</span></div>
+                                <div class="task-item"><input type="checkbox"> <span>10-min mock interview session</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reveal">
+                        <h2 style="margin-bottom: 1rem;">Upcoming</h2>
+                        <div class="card">
+                            <p style="font-size: 0.8rem; color: var(--text-muted);">Tomorrow, 10:00 AM</p>
+                            <h4 style="margin: 0.5rem 0;">Mock Interview: Google Prep</h4>
+                            <button class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.7rem; width: 100%;">Set Reminder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESUME PAGE -->
+            <div id="resume-page" class="page-view">
+                <h1>AI Resume Analyzer</h1>
+                <div class="card reveal" style="margin-top: 2rem;">
+                    <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                        <span style="font-size: 3rem;">📁</span>
+                        <h3>Drag & Drop your resume</h3>
+                        <input type="file" id="fileInput" hidden>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERVIEW PAGE -->
+            <div id="interview-page" class="page-view">
+                <h1>Mock Interview Prep</h1>
+                <div class="card reveal" style="margin-top: 2rem;">
+                    <div class="flex" style="gap: 1rem; margin-bottom: 1rem;">
+                        <select id="roleSelect" class="input-field" style="margin:0;">
+                            <option value="frontend">Frontend Developer</option>
+                            <option value="backend">Backend Developer</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="startInterview()">Start Session</button>
+                    </div>
+                    <div id="interviewMessages" class="chat-container"></div>
+                    <div class="flex" style="gap: 1rem;">
+                        <input type="text" id="interviewInput" class="input-field" style="margin:0;" placeholder="Your answer...">
+                        <button class="btn btn-primary" onclick="sendInterviewAnswer()">Send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROADMAPS PAGE -->
+            <div id="roadmaps-page" class="page-view">
+                <h1>AI Skill Roadmaps</h1>
+                <div class="card reveal" style="margin-top: 2rem;">
+                    <select id="roadmapSelect" class="input-field">
+                        <option value="frontend">Frontend Master</option>
+                        <option value="backend">Backend Specialist</option>
+                    </select>
+                    <div class="roadmap-timeline" style="margin-top: 2rem;">
+                        <div class="roadmap-step"><div class="card"><h4>Phase 1: Advanced CSS</h4><p>Mastering Grid, Flexbox, and Animations.</p></div></div>
+                        <div class="roadmap-step"><div class="card"><h4>Phase 2: JS Performance</h4><p>Event loops, memory leaks, and profiling.</p></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAT PAGE -->
+            <div id="chat-page" class="page-view">
+                <h1>AI Career Assistant</h1>
+                <div id="chatMessages" class="chat-container reveal" style="margin-top: 2rem;"></div>
+                <div class="flex reveal" style="gap: 1rem;">
+                    <input type="text" id="chatInput" class="input-field" style="margin:0;" placeholder="Ask anything about your career...">
+                    <button class="btn btn-primary" onclick="sendChatMessage()">Send</button>
+                </div>
+            </div>
+
+            <!-- PROJECTS PAGE -->
+            <div id="projects-page" class="page-view">
+                <h1>Project Ideas</h1>
+                <div class="projects-grid" style="margin-top: 2rem;">
+                    <div class="card reveal"><h4>AI Personal Finance</h4><p>Difficulty: Intermediate</p></div>
+                    <div class="card reveal"><h4>Decentralized App</h4><p>Difficulty: Advanced</p></div>
+                </div>
+            </div>
+
+            <!-- PORTFOLIO PAGE -->
+            <div id="portfolio-page" class="page-view">
+                <h1>Portfolio & Code Review</h1>
+                <div class="card reveal" style="margin-top: 2rem;">
+                    <textarea id="codeInput" class="input-field" rows="8" placeholder="Paste your code snippet here..."></textarea>
+                    <button class="btn btn-primary" onclick="reviewCode()">Review My Code</button>
+                    <div id="codeFeedback" style="margin-top: 1.5rem;"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // --- Router Logic ---
+        function showPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId + '-page').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.getElementById('link-' + pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            revealElements(); // Check reveal state on page change
+        }
+
+        // --- Scroll Animation Logic ---
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealElements);
+        document.addEventListener('DOMContentLoaded', revealElements);
+
+        // --- Feature Logics ---
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            if(!input.value.trim()) return;
+            addMessage('chatMessages', input.value, 'user');
+            input.value = '';
+            setTimeout(() => addMessage('chatMessages', "I'm analyzing your career path. Stay tuned!", 'ai'), 1000);
+        }
+
+        function startInterview() {
+            addMessage('interviewMessages', "Ready to start the mock interview. Tell me about your last project.", 'ai');
+        }
+
+        function sendInterviewAnswer() {
+            const input = document.getElementById('interviewInput');
+            if(!input.value.trim()) return;
+            addMessage('interviewMessages', input.value, 'user');
+            input.value = '';
+            setTimeout(() => addMessage('interviewMessages', "Interesting. How did you handle the performance bottlenecks?", 'ai'), 1000);
+        }
+
+        function addMessage(containerId, text, sender) {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = `message message-${sender}`;
+            div.innerText = text;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function reviewCode() {
+            const code = document.getElementById('codeInput').value;
+            const feedback = document.getElementById('codeFeedback');
+            if(!code) return;
+            feedback.innerHTML = "<div class='card reveal active' style='border-left:4px solid var(--primary-neon)'><h4>Analysis Result:</h4><p>Great logic! Add error handling for better reliability.</p></div>";
+        }
+    </script>
 </body>
 </html>
